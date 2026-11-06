@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #071b54;
+  --color-royal: #1239cd;
+  --color-brandred: #ef0712;
+  --color-paper: #f5f7fc;
+  --color-gold: #ffd522;
+  --color-ink: #101731;
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --shadow-card: 0 1px 2px #071b540f, 0 12px 32px -12px #071b542e;
+  --shadow-lift: 0 4px 8px #071b5414, 0 24px 48px -16px #071b5447;
+}
+
+:root {
+  --navy: #071b54;
+  --royal: #1239cd;
+  --red: #ef0712;
+  --paper: #f5f7fc;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  color: #101731;
+  font-family: "Manrope", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #ffd522;
+  color: #071b54;
+}
+
+.text-cmyk {
+  background: linear-gradient(94deg, #1239cd 10%, #071b54 42%, #ef0712 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.reg-mark {
+  position: relative;
+}
+.reg-mark::before,
+.reg-mark::after {
+  content: "+";
+  position: absolute;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: rgba(7, 27, 84, 0.28);
+  line-height: 1;
+}
+.reg-mark::before {
+  top: 8px;
+  left: 14px;
+}
+.reg-mark::after {
+  bottom: 8px;
+  right: 14px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee-x 46s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
