@@ -111,13 +111,62 @@ export const SERVICES = [
 ];
 
 export const ART_BOARDS = [
-  { gsm: 90, tone: "#1239CD", desc: "The lightest of the range — commonly used for leaflets, inserts and high-volume offset jobs." },
-  { gsm: 100, tone: "#5B3BC4", desc: "Everyday lightweight board for flyers, letterheads, forms and general commercial printing." },
-  { gsm: 130, tone: "#C42A8B", desc: "Popular mid-light weight for brochures, posters, mailers and handouts." },
-  { gsm: 170, tone: "#E85D04", desc: "Sturdy mid-weight board for premium brochures, covers, menus and display cards." },
-  { gsm: 250, tone: "#1F7A3D", desc: "Thick card stock for folders, invitation cards and premium stationery." },
-  { gsm: 300, tone: "#0E63B8", desc: "Heavy board for visiting cards, invitation cards and display items." },
-  { gsm: 350, tone: "#D02B2B", desc: "Rigid, premium board for luxury cards, covers and specialty prints." },
+  {
+    gsm: 90,
+    tone: "#1239CD",
+    iconImg: "./gsm-icons/row2.png",
+    details: "Sketch Pads, Notebooks, Stationery",
+    img: u("photo-1503694978374-8a2fa686963a", 800),
+    desc: "The lightest of the range — commonly used for sketch pads, notebooks, stationery, leaflets, inserts and high-volume offset jobs.",
+  },
+  {
+    gsm: 100,
+    tone: "#5B3BC4",
+    iconImg: "./gsm-icons/row3.png",
+    details: "Standard Printing Paper, Basic Documents",
+    img: u("photo-1598299803204-b73796f43289", 800),
+    desc: "Everyday lightweight board for standard printing paper, basic documents, flyers, letterheads and commercial forms.",
+  },
+  {
+    gsm: 130,
+    tone: "#C42A8B",
+    iconImg: "./gsm-icons/row4.png",
+    details: "Posters, Brochures, Flyers",
+    img: u("photo-1769893715447-8f12c382e49c", 800),
+    desc: "Popular mid-light weight for posters, brochures, flyers, mailers and promotional handouts.",
+  },
+  {
+    gsm: 170,
+    tone: "#E85D04",
+    iconImg: "./gsm-icons/row4.png",
+    details: "Posters, Brochures, Flyers",
+    img: u("photo-1591351659190-6258bbec984d", 800),
+    desc: "Sturdy mid-weight board for posters, brochures, flyers, menus and display cards.",
+  },
+  {
+    gsm: 250,
+    tone: "#1F7A3D",
+    iconImg: "./gsm-icons/row5.png",
+    details: "Magazine Covers, Promotional Flyers, Art Paper",
+    img: u("photo-1562155695-fb6e1f95fcfd", 800),
+    desc: "Thick art board stock for magazine covers, promotional flyers, art paper, folders and premium stationery.",
+  },
+  {
+    gsm: 300,
+    tone: "#0E63B8",
+    iconImg: "./gsm-icons/row5.png",
+    details: "Magazine Covers, Promotional Flyers, Art Paper",
+    img: u("photo-1718670013988-c6e3edb92345", 800),
+    desc: "Heavy board for magazine covers, promotional flyers, art paper, visiting cards and display items.",
+  },
+  {
+    gsm: 350,
+    tone: "#D02B2B",
+    iconImg: "./gsm-icons/row6.png",
+    details: "Cardstock, Business Cards, Invitations, Packaging",
+    img: u("photo-1785336872624-723ff9405035", 800),
+    desc: "Rigid, premium board for cardstock, business cards, invitations, packaging and luxury covers.",
+  },
 ];
 
 export const MATERIALS = [

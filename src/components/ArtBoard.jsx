@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { ART_BOARDS } from "../data/content";
-import { Reveal, SectionHead, PaperStack } from "./ui-bits";
+import { Reveal, SectionHead } from "./ui-bits";
 
 export default function ArtBoard({ onEnquire }) {
   const [sel, setSel] = useState(ART_BOARDS[3]);
@@ -21,9 +21,9 @@ export default function ArtBoard({ onEnquire }) {
           sub="Select a GSM to preview the board category — art board stocks from 90 to 350 GSM."
         />
 
-        {/* selector chips */}
+        {/* selector cards with GSM chart icons and details below for all 7 GSM boxes */}
         <Reveal delay={0.15}>
-          <div className="mt-10 flex snap-x gap-3 overflow-x-auto pb-2 no-scrollbar lg:grid lg:grid-cols-7 lg:overflow-visible">
+          <div className="mt-10 flex snap-x gap-3.5 overflow-x-auto pb-2 no-scrollbar lg:grid lg:grid-cols-7 lg:overflow-visible">
             {ART_BOARDS.map((a) => {
               const isSel = a.gsm === sel.gsm;
               return (
@@ -31,20 +31,38 @@ export default function ArtBoard({ onEnquire }) {
                   key={a.gsm}
                   data-testid={`artboard-chip-${a.gsm}-gsm`}
                   onClick={() => setSel(a)}
-                  className={`group relative min-w-[130px] snap-start overflow-hidden rounded-2xl border-2 bg-white p-4 text-left transition-all duration-300 ${
-                    isSel ? "shadow-lift" : "border-transparent shadow-card hover:shadow-lift"
+                  className={`group relative flex min-w-[160px] snap-start flex-col overflow-hidden rounded-2xl border-2 bg-white p-3 text-left transition-all duration-300 lg:min-w-0 ${
+                    isSel ? "-translate-y-1 shadow-lift" : "border-royal/10 shadow-card hover:-translate-y-0.5 hover:shadow-lift"
                   }`}
                   style={isSel ? { borderColor: a.tone } : {}}
                 >
-                  <span
-                    className="inline-block rounded-md px-2 py-0.5 font-mono text-xs font-semibold text-white"
-                    style={{ background: a.tone }}
-                  >
-                    {a.gsm} GSM
-                  </span>
-                  <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink/50">Art Board</p>
-                  <div className="mt-3">
-                    <PaperStack tone={a.tone} />
+                  <div className="relative flex h-24 w-full items-center justify-center overflow-hidden rounded-xl border border-navy/10 bg-[#F2EDE2] p-2.5">
+                    <img
+                      src={a.iconImg}
+                      alt={`${a.gsm} GSM icons - ${a.details}`}
+                      loading="lazy"
+                      className="max-h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col justify-between px-1 pb-1 pt-3">
+                    <div>
+                      <div className="flex items-center justify-between gap-1">
+                        <p className="font-display text-sm font-extrabold text-[#0A4D96]">{a.gsm} GSM</p>
+                        <span
+                          className="h-2 w-2 shrink-0 rounded-full"
+                          style={{ background: a.tone }}
+                        />
+                      </div>
+                      <p className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-ink/45">
+                        Art Board
+                      </p>
+                      <p
+                        data-testid={`artboard-details-${a.gsm}-gsm`}
+                        className="mt-2 border-t border-royal/10 pt-2 text-[11.5px] font-semibold leading-snug text-ink/85"
+                      >
+                        {a.details}
+                      </p>
+                    </div>
                   </div>
                 </button>
               );
@@ -70,7 +88,10 @@ export default function ArtBoard({ onEnquire }) {
                     <span className="ml-2 text-xl text-white/60">GSM</span>
                   </p>
                   <p className="mt-1 font-display text-lg font-bold">Art Board</p>
-                  <p className="mt-4 text-sm leading-relaxed text-white/70" data-testid="artboard-description">
+                  <p className="mt-3 inline-block rounded-lg bg-white/10 px-3 py-1.5 text-xs font-semibold text-gold">
+                    {sel.details}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/70" data-testid="artboard-description">
                     {sel.desc}
                   </p>
                 </motion.div>
@@ -90,29 +111,39 @@ export default function ArtBoard({ onEnquire }) {
           </Reveal>
 
           <Reveal delay={0.18}>
-            <div className="relative flex h-full min-h-[260px] items-center justify-center overflow-hidden rounded-3xl border border-royal/10 bg-white p-8 shadow-card">
+            <div className="relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-3xl border border-royal/10 bg-white p-4 shadow-card sm:p-6">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={sel.gsm}
-                  initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-center"
+                  className="flex h-full flex-1 flex-col justify-between"
                 >
-                  <div className="relative mx-auto w-72">
-                    {[...Array(9)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute inset-x-0 h-8 rounded-[4px] border border-royal/15 bg-white shadow-md"
-                        style={{ bottom: i * 9, transform: `skewX(-16deg)`, zIndex: 9 - i }}
-                      />
-                    ))}
-                    <div className="absolute inset-x-0 bottom-0 h-3 rounded-b-[4px]" style={{ background: sel.tone, transform: "skewX(-16deg)", zIndex: 10 }} />
-                    <div className="h-56" />
+                  <div className="relative flex flex-1 flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border-2 border-[#0A4D96]/20 bg-[#F2EDE2] p-6 sm:flex-row sm:justify-around">
+                    <img
+                      src={sel.iconImg}
+                      alt={`${sel.gsm} GSM Paper Thickness Icons`}
+                      className="h-24 w-auto object-contain sm:h-28"
+                    />
+                    <div className="text-center sm:text-left">
+                      <span
+                        className="inline-flex items-center rounded-md px-2.5 py-0.5 font-mono text-[11px] font-bold uppercase tracking-wider text-white"
+                        style={{ background: sel.tone }}
+                      >
+                        Paper Thickness Guide
+                      </span>
+                      <p className="mt-2 font-display text-2xl font-extrabold text-[#0A4D96]">
+                        {sel.gsm} GSM
+                      </p>
+                      <p className="mt-1 max-w-xs text-sm font-semibold leading-snug text-ink/90">
+                        {sel.details}
+                      </p>
+                    </div>
                   </div>
-                  <p className="mt-6 font-mono text-xs uppercase tracking-[0.22em] text-ink/40">
-                    {sel.gsm} GSM · Art Board · Stock {String(idx + 1).padStart(2, "0")}/07
+                  <p className="mt-3 text-center font-mono text-xs uppercase tracking-[0.22em] text-ink/50">
+                    {sel.gsm} GSM · {sel.details} · Stock {String(idx + 1).padStart(2, "0")}/07
                   </p>
                 </motion.div>
               </AnimatePresence>

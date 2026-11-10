@@ -44,6 +44,10 @@ test("art boards and flex materials catalogue integrity", () => {
     ART_BOARDS.map((b) => b.gsm),
     [90, 100, 130, 170, 250, 300, 350]
   );
+  for (const b of ART_BOARDS) {
+    assert.ok(b.iconImg && b.iconImg.startsWith("./gsm-icons/row"));
+    assert.ok(b.details && b.details.length > 5);
+  }
   assert.equal(MATERIALS.length, 10);
   assert.deepEqual(MATERIAL_TABS, ["All", "Flex & Banner", "Vinyl & Film", "Fabric"]);
   for (const m of MATERIALS) {
