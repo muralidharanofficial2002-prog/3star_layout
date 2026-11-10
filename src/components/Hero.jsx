@@ -14,13 +14,30 @@ const line = {
 export default function Hero({ onQuote }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const markY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
-    <section id="home" ref={ref} className="reg-mark relative overflow-hidden bg-white pt-[104px] lg:pt-[120px]">
+    <section
+      id="home"
+      ref={ref}
+      className="reg-mark relative flex min-h-[88vh] items-center overflow-hidden bg-white pt-[104px] lg:min-h-[92vh] lg:pt-[120px]"
+    >
+      {/* Full-size background image */}
+      <motion.div style={{ y: imgY }} className="pointer-events-none absolute inset-0 z-0">
+        <img
+          src={HERO_IMG}
+          alt="Commercial printing showroom with flex and offset printing machines and freshly printed materials"
+          className="h-full w-full object-cover object-center"
+          loading="eager"
+        />
+        {/* Light left-to-right gradient so the exact navy + CMYK headline colors pop on the left while the full background image shows on the right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/15 lg:via-white/85 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-white/40" />
+      </motion.div>
+
       {/* CMYK registration dots */}
-      <motion.div style={{ y: markY }} className="pointer-events-none absolute inset-0" aria-hidden>
+      <motion.div style={{ y: markY }} className="pointer-events-none absolute inset-0 z-10" aria-hidden>
         <div className="absolute -top-10 right-1/4 grid grid-cols-8 gap-2 opacity-[0.16]">
           {["#00B7EB", "#EF0712", "#FFD522", "#071B54"].map((c, i) => (
             <div key={i} className="grid grid-cols-2 gap-2">
@@ -30,27 +47,26 @@ export default function Hero({ onQuote }) {
             </div>
           ))}
         </div>
-        <div className="absolute bottom-24 left-6 hidden lg:block font-mono text-[10px] uppercase tracking-[0.25em] text-royal/40 [writing-mode:vertical-rl]">
+        <div className="absolute bottom-24 left-6 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-royal/40 [writing-mode:vertical-rl] lg:block">
           Digital · Flex · Offset — Registration OK
         </div>
       </motion.div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-8 sm:px-6 lg:grid-cols-[45%_55%] lg:items-center lg:gap-8 lg:pb-24 lg:pt-10">
-        {/* left copy */}
-        <div>
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:pb-24 lg:pt-10">
+        <div className="max-w-xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-royal/15 bg-paper px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-royal"
+            className="inline-flex items-center gap-2 rounded-full border border-royal/15 bg-paper/95 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-royal backdrop-blur-sm"
           >
             <Sparkles size={12} className="text-brandred" />
             All Type of Printing Solutions
           </motion.div>
 
-          <h1 className="mt-6 font-display font-extrabold tracking-tight leading-[1.02] text-navy text-[2.6rem] sm:text-6xl lg:text-[4.1rem]">
+          <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-tight text-navy sm:text-6xl lg:text-[4.1rem]">
             <span className="block overflow-hidden pb-1">
-              <motion.span custom={0} variants={line} initial="hidden" animate="show" className="block">
+              <motion.span custom={0} variants={line} initial="hidden" animate="show" className="block text-navy">
                 YOUR ONE-STOP
               </motion.span>
             </span>
@@ -74,7 +90,7 @@ export default function Hero({ onQuote }) {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.68, duration: 0.6 }}
-            className="mt-3 max-w-md text-[15px] leading-relaxed text-ink/60"
+            className="mt-3 max-w-md text-[15px] leading-relaxed text-ink/75"
           >
             High Quality Printing <span className="mx-1 font-mono text-royal">•</span> Competitive Price{" "}
             <span className="mx-1 font-mono text-royal">•</span> Quick Delivery
@@ -97,7 +113,7 @@ export default function Hero({ onQuote }) {
             <button
               data-testid="hero-get-quote-button"
               onClick={onQuote}
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-navy px-7 py-3.5 font-bold text-navy transition-all hover:bg-navy hover:text-white"
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-navy bg-white/80 px-7 py-3.5 font-bold text-navy backdrop-blur-sm transition-all hover:bg-navy hover:text-white"
             >
               <FileText size={17} className="transition-transform duration-300 group-hover:-rotate-6" />
               Get a Quote
@@ -108,53 +124,12 @@ export default function Hero({ onQuote }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.05, duration: 0.7 }}
-            className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gold/25 px-3.5 py-2 text-[13px] font-bold text-navy"
+            className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gold/25 px-3.5 py-2 text-[13px] font-bold text-navy backdrop-blur-sm"
           >
             <span className="font-mono text-[10px] tracking-[0.2em] text-brandred">3STAR</span>
             Best Price & Best Quality
           </motion.div>
         </div>
-
-        {/* right visual */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
-        >
-          <motion.div style={{ y: imgY }} className="relative">
-            <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-br from-royal/15 via-transparent to-brandred/15 blur-xl" />
-            <div className="overflow-hidden rounded-[1.75rem] border border-royal/10 shadow-lift">
-              <img
-                src={HERO_IMG}
-                alt="Commercial printing showroom with flex and offset printing machines and freshly printed materials"
-                className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[500px]"
-                loading="eager"
-              />
-              <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/20" />
-            </div>
-
-            {/* floating chips */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
-              className="absolute -bottom-5 left-5 rounded-2xl border border-royal/10 bg-white/95 px-4 py-3 shadow-card backdrop-blur"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-royal">Art Board</p>
-              <p className="font-display text-sm font-bold text-navy">90 – 350 GSM</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.25, duration: 0.6 }}
-              className="absolute -top-4 right-5 rounded-2xl bg-navy px-4 py-3 text-white shadow-lift"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60">Flex Materials</p>
-              <p className="font-display text-sm font-bold">Flex · Star · Backlit · Vinyl</p>
-            </motion.div>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );
