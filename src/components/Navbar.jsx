@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, ChevronDown, Menu, X, ArrowUpRight, Star } from "lucide-react";
-import logo from "../assets/logo-3star-transparent.png";
+const logo = "./logo-3star-transparent.png";
 import {
   NAV_LINKS,
   ART_BOARDS,

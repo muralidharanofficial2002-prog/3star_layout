@@ -1,5 +1,5 @@
 import { Phone, Mail, MessageCircle, Star } from "lucide-react";
-import logo from "../assets/logo-3star-transparent.png";
+const logo = "./logo-3star-transparent.png";
 import { NAV_LINKS, SERVICES, ART_BOARDS, MATERIALS, PHONE, EMAIL, PHONE_TEL, waLink, scrollToId } from "../data/content";
 
 export default function Footer() {
